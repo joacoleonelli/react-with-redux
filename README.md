@@ -1,11 +1,6 @@
-# Getting Started with Create React App
+# Init commands
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
+### `npm install`
 ### `npm start`
 
 Runs the app in the development mode.\
@@ -43,18 +38,21 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 By using Redux we’re solving this problems by introducing a central data store in our application. The store contains the state of the application and is the source of truth for components. By using the store concept you do not need to synchronize state between components manually. Instead you can fully rely on the Redux store at any time.
 
-Redux has three main parts: Actions, Reducers and Store
+**Redux has three main parts: Actions, Reducers and Store**
 
-Actions
+**Actions**
+
 Actions are used to send information from the application to the store.
 
 Actions are JavaScript objects like:
+
 {
     type: LOGIN_USER,
     payload: {username: ‘sebastian’, password: ‘123456’}
 }
 
 Action objects are created by using functions. These functions are called action creators:
+
 function authUser(data) {
     return {
         type: LOGIN_USER,
@@ -66,7 +64,7 @@ Calling actions in the application is easy by using the dispatch method:
 
 dispatch(authUser(data));
 
-Reducers
+**Reducers**
 
 Reducers are pure JavaScript functions that take the current application state and an action object and return a new application state:
 
@@ -83,7 +81,8 @@ function myReducer (state , action)  {
 
 The important thing to notice here is that the state is not changed directly. Instead a new state object (based on the old state) is created and the update is done to the new state.
 
-Store
+**Store**
+
 The store is the central objects that holds the state of the application. The store is created by using the createStore method from the Redux library
 
 import { createStore } from ‘redux’;
@@ -93,3 +92,5 @@ You need to pass in the reducer function as a parameter. Now you’re ready to d
 
 let authData = {username: ‘sebastian’, password: ‘123456’};
 store.dispatch(authUser(authData));
+
+￼
