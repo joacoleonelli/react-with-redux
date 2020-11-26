@@ -45,28 +45,35 @@ Actions are used to send information from the application to the store.
 
 Actions are JavaScript objects like:
 
+```
 {
     type: LOGIN_USER,
     payload: {username: ‘sebastian’, password: ‘123456’}
 }
+```
 
 Action objects are created by using functions. These functions are called action creators:
 
+```
 function authUser(data) {
     return {
         type: LOGIN_USER,
         payload: data
     }
 }
+```
 
 Calling actions in the application is easy by using the dispatch method:
 
+```
 dispatch(authUser(data));
+```
 
 ## Reducers
 
 Reducers are pure JavaScript functions that take the current application state and an action object and return a new application state:
 
+```
 function myReducer (state , action)  {
   switch (action.type) {
     case 'LOGIN_USER':
@@ -77,6 +84,7 @@ function myReducer (state , action)  {
       return state
   }
 }
+```
 
 The important thing to notice here is that the state is not changed directly. Instead a new state object (based on the old state) is created and the update is done to the new state.
 
@@ -84,12 +92,17 @@ The important thing to notice here is that the state is not changed directly. In
 
 The store is the central objects that holds the state of the application. The store is created by using the createStore method from the Redux library
 
+```
 import { createStore } from ‘redux’;
 let store = createStore(myReducer);
+```
 
 You need to pass in the reducer function as a parameter. Now you’re ready to disptach a action to the store which is handled by the reducer:
 
+```
 let authData = {username: ‘sebastian’, password: ‘123456’};
 store.dispatch(authUser(authData));
+```
 
 ￼
+![Redux data flow](https://miro.medium.com/max/1400/1*fcbWaGi9QCNYa5DoUYmERw.png)
