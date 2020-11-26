@@ -106,3 +106,5 @@ store.dispatch(authUser(authData));
 
 ￼
 ![Redux data flow](https://miro.medium.com/max/1400/1*fcbWaGi9QCNYa5DoUYmERw.png)
+
+### SRC: https://medium.com/codingthesmartway-com-blog/learn-redux-introduction-to-state-management-with-react-b87bc570b12a
