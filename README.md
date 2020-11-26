@@ -39,32 +39,57 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Redux Notes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+By using Redux we’re solving this problems by introducing a central data store in our application. The store contains the state of the application and is the source of truth for components. By using the store concept you do not need to synchronize state between components manually. Instead you can fully rely on the Redux store at any time.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Redux has three main parts: Actions, Reducers and Store
 
-### Code Splitting
+Actions
+Actions are used to send information from the application to the store.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Actions are JavaScript objects like:
+{
+    type: LOGIN_USER,
+    payload: {username: ‘sebastian’, password: ‘123456’}
+}
 
-### Analyzing the Bundle Size
+Action objects are created by using functions. These functions are called action creators:
+function authUser(data) {
+    return {
+        type: LOGIN_USER,
+        payload: data
+    }
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Calling actions in the application is easy by using the dispatch method:
 
-### Making a Progressive Web App
+dispatch(authUser(data));
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Reducers
 
-### Advanced Configuration
+Reducers are pure JavaScript functions that take the current application state and an action object and return a new application state:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+function myReducer (state , action)  {
+  switch (action.type) {
+    case 'LOGIN_USER':
+      return Object.assign({}, state, {
+        auth: action.payload
+      })
+    default:
+      return state
+  }
+}
 
-### Deployment
+The important thing to notice here is that the state is not changed directly. Instead a new state object (based on the old state) is created and the update is done to the new state.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Store
+The store is the central objects that holds the state of the application. The store is created by using the createStore method from the Redux library
 
-### `npm run build` fails to minify
+import { createStore } from ‘redux’;
+let store = createStore(myReducer);
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You need to pass in the reducer function as a parameter. Now you’re ready to disptach a action to the store which is handled by the reducer:
+
+let authData = {username: ‘sebastian’, password: ‘123456’};
+store.dispatch(authUser(authData));
