@@ -34,14 +34,13 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Redux Notes
+# Redux Notes
 
 By using Redux we’re solving this problems by introducing a central data store in our application. The store contains the state of the application and is the source of truth for components. By using the store concept you do not need to synchronize state between components manually. Instead you can fully rely on the Redux store at any time.
 
 **Redux has three main parts: Actions, Reducers and Store**
 
-**Actions**
-
+## Actions
 Actions are used to send information from the application to the store.
 
 Actions are JavaScript objects like:
@@ -64,7 +63,7 @@ Calling actions in the application is easy by using the dispatch method:
 
 dispatch(authUser(data));
 
-**Reducers**
+## Reducers
 
 Reducers are pure JavaScript functions that take the current application state and an action object and return a new application state:
 
@@ -81,7 +80,7 @@ function myReducer (state , action)  {
 
 The important thing to notice here is that the state is not changed directly. Instead a new state object (based on the old state) is created and the update is done to the new state.
 
-**Store**
+## Store
 
 The store is the central objects that holds the state of the application. The store is created by using the createStore method from the Redux library
 
